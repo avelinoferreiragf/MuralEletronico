@@ -76,25 +76,7 @@ public class FormularioActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-/*
-    private void configurarDataPublicacaoPicker() {
-        PublicacaoFiltro filtro = PublicacaoFiltro.getInstance();
-        Date hoje = new Date();
-        if (filtro.getDataPublicacao() == null) {
-            filtro.setDataPublicacao(new Date());
-        }
-        DatePicker datePickerDataPublicacao = (DatePicker) findViewById(R.id.formulario_data_publicacao);
-        datePickerDataPublicacao.setMaxDate(hoje.getTime());
 
-        Calendar c = Calendar.getInstance();
-        c.setTime(filtro.getDataPublicacao());
-        Integer dia = c.get(Calendar.DAY_OF_MONTH);
-        Integer mes = c.get(Calendar.MONTH);
-        Integer ano = c.get(Calendar.YEAR);
-
-        datePickerDataPublicacao.updateDate(ano, mes, dia);
-    }
-*/
     private void informarParametrosDaConsulta() {
         PublicacaoFiltro filtro = PublicacaoFiltro.getInstance();
 
@@ -110,22 +92,6 @@ public class FormularioActivity extends AppCompatActivity {
         finish();
     }
 
-    /*
-private Date getDataPublicacaoDoDatePicker() {
-    DatePicker datePickerDataPublicacao = (DatePicker) findViewById(R.id.formulario_data_publicacao);
-    Integer dia = datePickerDataPublicacao.getDayOfMonth();
-    Integer mes = datePickerDataPublicacao.getMonth();
-    Integer ano = datePickerDataPublicacao.getYear();
-
-    Calendar c = Calendar.getInstance();
-    c.set(Calendar.DAY_OF_MONTH, dia);
-    c.set(Calendar.MONTH, mes);
-    c.set(Calendar.YEAR, ano);
-
-    Date dataPublicacao = c.getTime();
-    return dataPublicacao;
-}
-*/
     private String getPropriedadeString(Integer idComponente) {
         EditText editText = (EditText) this.findViewById(idComponente);
         return editText.getText().toString();
