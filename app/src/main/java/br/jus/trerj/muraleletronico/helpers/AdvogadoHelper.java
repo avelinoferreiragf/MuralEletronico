@@ -43,7 +43,7 @@ public class AdvogadoHelper {
         if (toStringAdvogados.size() == 0) {
             toStringAdvogados.add(this.activity.getString(R.string.formulario_advogados_sem_advogados_short));
         } else {
-            toStringAdvogados.set(0, this.activity.getString(R.string.formulario_advogados_selecione));
+            toStringAdvogados.add(0, this.activity.getString(R.string.formulario_advogados_selecione));
         }
         this.setSpinnerValues(toStringAdvogados);
     }
