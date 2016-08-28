@@ -75,7 +75,7 @@ public class AdvogadoHelper {
         } else if (publicacaoFiltro.getQuantidadeAdvogadosDisponives() == 1) {
             Toast.makeText(this.activity, this.activity.getString(R.string.formulario_advogados_com_advogado), Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(this.activity, publicacaoFiltro.getQuantidadeAdvogadosDisponives() + this.activity.getString(R.string.formulario_advogados_com_advogados), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this.activity, publicacaoFiltro.getQuantidadeAdvogadosDisponives() + " " + this.activity.getString(R.string.formulario_advogados_com_advogados), Toast.LENGTH_SHORT).show();
         }
     }
 
