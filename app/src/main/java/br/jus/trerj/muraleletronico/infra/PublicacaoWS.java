@@ -39,19 +39,27 @@ public class PublicacaoWS {
         PublicacaoFiltro filtro = PublicacaoFiltro.getInstance();
 
         String strDataPublicacao = "";
+        String strIdAdvogado = "";
         String strIsSJD = "";
+
         if (filtro.getDataPublicacao() != null) {
            strDataPublicacao = SDF.format(filtro.getDataPublicacao());
+        }
+
+        if (filtro.getAdvogado() != null) {
+            strIdAdvogado = filtro.getAdvogado().getId().toString();
         }
 
         if (filtro.getSJD() != null && filtro.getSJD()) {
             strIsSJD = "SJD";
         }
+
         RequestParams parametros = new RequestParams();
         parametros.add("dataPublicacao", strDataPublicacao);
         parametros.add("numeroProcesso", filtro.getNumeroProcesso());
         parametros.add("numeroProtocolo", filtro.getNumeroProtocolo());
         parametros.add("apenasSJD", strIsSJD);
+        parametros.add("idAdvogado", strIdAdvogado);
 
         this.activity.findViewById(R.id.loading_panel).setVisibility(View.VISIBLE);
         MuralEletronicoRestClient.get(URL, parametros, new JsonHttpResponseHandler() {

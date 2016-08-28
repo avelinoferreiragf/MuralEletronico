@@ -12,6 +12,7 @@ import com.loopj.android.http.RequestParams;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.net.ConnectException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -80,6 +81,7 @@ public class AdvogadoWS {
                     AdvogadoWS.this.helper.avisarUsuarioDoFinalDoCarregamentoAssincrono();
 
                 } catch (Exception e) {
+                    AdvogadoWS.this.helper.avisarUsuarioDoFinalDoCarregamentoAssincrono();
                     throw new TRERJNonPresentableException(e);
                 }
             }

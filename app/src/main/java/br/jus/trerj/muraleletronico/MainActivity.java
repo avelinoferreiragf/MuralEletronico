@@ -10,6 +10,7 @@ import android.widget.ImageButton;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import br.jus.trerj.muraleletronico.exceptions.ExceptionHandler;
 import br.jus.trerj.muraleletronico.filter.PublicacaoFiltro;
 import br.jus.trerj.muraleletronico.infra.AdvogadoWS;
 import br.jus.trerj.muraleletronico.infra.PublicacaoWS;
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(this));
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setIcon(R.drawable.ic_launcher);

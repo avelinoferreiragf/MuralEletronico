@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * Created by avelinoferreiragf on 27/08/16.
  */
-public class Advogado {
+public class Advogado implements Comparable<Advogado> {
     private Long id;
     private String nome;
     private String numeroOAB;
@@ -57,5 +57,13 @@ public class Advogado {
     @Override
     public String toString() {
         return this.getNome() + " / OAB: " + this.getNumeroOAB();
+    }
+
+    @Override
+    public int compareTo(Advogado another) {
+        if (another == null) {
+            return 1;
+        }
+        return this.toString().compareTo(another.toString());
     }
 }

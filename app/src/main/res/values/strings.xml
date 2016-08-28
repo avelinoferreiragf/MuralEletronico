@@ -2,6 +2,7 @@
     <color name="menu">#F1F1F1</color>
     <string name="app_name">Mural Eletrônico do TRE-RJ</string>
 
+    <string name="app_erro_padrao">Ocorreu um erro na Aplicação: </string>
     <string name="formulario_titulo">Consultar Publicações</string>
     <string name="formulario_numero_processo">Número do Processo</string>
     <string name="formulario_numero_protocolo">Número do Protocolo</string>

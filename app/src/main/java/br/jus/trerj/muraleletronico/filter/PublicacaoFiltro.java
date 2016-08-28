@@ -2,6 +2,8 @@ package br.jus.trerj.muraleletronico.filter;
 
 import java.util.Date;
 
+import br.jus.trerj.muraleletronico.modelo.Advogado;
+
 /**
  * Created by avelinoferreiragf on 27/08/16.
  */
@@ -16,6 +18,7 @@ public class PublicacaoFiltro {
     private String numeroProtocolo = "";
     private Date dataPublicacao = new Date();
     private Boolean isSJD = false;
+    private Advogado advogado = null;
 
     public Date getDataPublicacao() {
         return dataPublicacao;
@@ -47,5 +50,13 @@ public class PublicacaoFiltro {
 
     public void setSJD(Boolean SJD) {
         isSJD = SJD;
+    }
+
+    public Advogado getAdvogado() {
+        return advogado;
+    }
+
+    public void setAdvogado(Advogado advogado) {
+        this.advogado = advogado;
     }
 }

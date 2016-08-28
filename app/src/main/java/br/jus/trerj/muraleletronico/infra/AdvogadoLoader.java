@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import br.jus.trerj.muraleletronico.exceptions.TRERJNonPresentableException;
 import br.jus.trerj.muraleletronico.modelo.Advogado;
@@ -17,7 +19,7 @@ import br.jus.trerj.muraleletronico.modelo.Advogado;
 public class AdvogadoLoader {
 
     public List<Advogado> carregar(JSONArray advogadosJson) {
-        Set<Advogado> advogados = new HashSet<Advogado>();
+        SortedSet<Advogado> advogados = new TreeSet<Advogado>();
         if (advogadosJson == null) {
             return new ArrayList<Advogado>();
         }

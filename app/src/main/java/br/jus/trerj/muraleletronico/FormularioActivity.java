@@ -22,6 +22,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import br.jus.trerj.muraleletronico.exceptions.ExceptionHandler;
 import br.jus.trerj.muraleletronico.filter.PublicacaoFiltro;
 import br.jus.trerj.muraleletronico.helpers.AdvogadoHelper;
 import br.jus.trerj.muraleletronico.infra.AdvogadoWS;
@@ -40,6 +41,8 @@ public class FormularioActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formulario);
+        Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(this));
+
         this.advogadosDisponiveis = new ArrayList<Advogado>();
 
         PublicacaoFiltro filtro = PublicacaoFiltro.getInstance();
@@ -86,7 +89,9 @@ public class FormularioActivity extends AppCompatActivity {
 
         advogadosSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-                Object item = parent.getItemAtPosition(pos);
+                Advogado advogadoSelecionado = FormularioActivity.this.advogadoHelper.getAdvogadoAtPosition(pos);
+                PublicacaoFiltro.getInstance().setAdvogado(advogadoSelecionado);
+                System.out.println(advogadoSelecionado);
             }
             public void onNothingSelected(AdapterView<?> parent) {
             }

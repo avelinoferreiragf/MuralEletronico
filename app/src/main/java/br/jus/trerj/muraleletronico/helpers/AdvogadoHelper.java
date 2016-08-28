@@ -29,6 +29,7 @@ public class AdvogadoHelper {
     public void iniciar() {
         this.setSpinnerValues(new ArrayList<String>());
     }
+
     public void avisarUsuarioDoInicioDoCarregamentoAssincrono() {
         this.activity.findViewById(R.id.loading_panel_formulario).setVisibility(View.VISIBLE);
     }
@@ -56,7 +57,12 @@ public class AdvogadoHelper {
         } else {
             Toast.makeText(this.activity, advogadosDisponiveis.size() + this.activity.getString(R.string.formulario_advogados_com_advogados), Toast.LENGTH_SHORT).show();
         }
-   }
+    }
+
+    public void avisarUsuarioDoFinalDoCarregamentoAssincrono(Exception e) {
+        this.activity.findViewById(R.id.loading_panel_formulario).setVisibility(View.GONE);
+        Toast.makeText(this.activity, advogadosDisponiveis.size() + this.activity.getString(R.string.formulario_advogados_com_advogados), Toast.LENGTH_SHORT).show();
+    }
 
     private void setSpinnerValues(List<String> values) {
         if (values == null) {
@@ -71,4 +77,10 @@ public class AdvogadoHelper {
         spinner.setAdapter(adapter);
     }
 
+    public Advogado getAdvogadoAtPosition(int pos) {
+        if (pos == 0 || this.advogadosDisponiveis == null || this.advogadosDisponiveis.size() <= 1) {
+            return null;
+        }
+        return this.advogadosDisponiveis.get(pos);
+    }
 }
