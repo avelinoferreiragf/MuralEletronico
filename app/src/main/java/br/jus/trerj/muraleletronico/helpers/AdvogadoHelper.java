@@ -10,6 +10,7 @@ import java.util.List;
 
 import br.jus.trerj.muraleletronico.FormularioActivity;
 import br.jus.trerj.muraleletronico.R;
+import br.jus.trerj.muraleletronico.filter.PublicacaoFiltro;
 import br.jus.trerj.muraleletronico.modelo.Advogado;
 
 /**
@@ -19,7 +20,6 @@ import br.jus.trerj.muraleletronico.modelo.Advogado;
  */
 public class AdvogadoHelper {
 
-    private List<Advogado> advogadosDisponiveis;
     private FormularioActivity activity;
 
     public AdvogadoHelper(FormularioActivity activity) {
@@ -35,7 +35,10 @@ public class AdvogadoHelper {
     }
 
     public void carregarAdvogadosDisponiveis(List<Advogado> advogados) {
-        this.advogadosDisponiveis = advogados;
+        PublicacaoFiltro.getInstance().setAdvogadosDisponiveis(advogados);
+        if (advogados == null) {
+            return;
+        }
         List<String> toStringAdvogados = new ArrayList<String>();
         for(Advogado advogado : advogados) {
             toStringAdvogados.add(advogado.toString());
@@ -46,23 +49,39 @@ public class AdvogadoHelper {
             toStringAdvogados.add(0, this.activity.getString(R.string.formulario_advogados_selecione));
         }
         this.setSpinnerValues(toStringAdvogados);
-        
+
+    }
+    public void selecionarAdvogadoSelecionado() {
+        PublicacaoFiltro publicacaoFiltro = PublicacaoFiltro.getInstance();
+        Advogado advogadoSelecionado = publicacaoFiltro.getAdvogado();
+        if (advogadoSelecionado == null) {
+            return;
+        }
+        Integer pos = publicacaoFiltro.getAdvogadosDisponiveis().indexOf(advogadoSelecionado);
+        if (pos < 0) {
+            return;
+        }
+        Spinner spinner = (Spinner) this.activity.findViewById(R.id.formulario_advogados);
+        spinner.setSelection(pos);
+
     }
 
+
     public void avisarUsuarioDoFinalDoCarregamentoAssincrono() {
+        PublicacaoFiltro publicacaoFiltro = PublicacaoFiltro.getInstance();
         this.activity.findViewById(R.id.loading_panel_formulario).setVisibility(View.GONE);
-        if (this.advogadosDisponiveis == null || this.advogadosDisponiveis.size() == 0) {
+        if (!publicacaoFiltro.hasAdvogados()) {
             Toast.makeText(this.activity, this.activity.getString(R.string.formulario_advogados_sem_advogados), Toast.LENGTH_SHORT).show();
-        } else if (advogadosDisponiveis.size() == 1) {
+        } else if (publicacaoFiltro.getQuantidadeAdvogadosDisponives() == 1) {
             Toast.makeText(this.activity, this.activity.getString(R.string.formulario_advogados_com_advogado), Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(this.activity, advogadosDisponiveis.size() + this.activity.getString(R.string.formulario_advogados_com_advogados), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this.activity, publicacaoFiltro.getQuantidadeAdvogadosDisponives() + this.activity.getString(R.string.formulario_advogados_com_advogados), Toast.LENGTH_SHORT).show();
         }
     }
 
     public void avisarUsuarioDoFinalDoCarregamentoAssincrono(Exception e) {
         this.activity.findViewById(R.id.loading_panel_formulario).setVisibility(View.GONE);
-        Toast.makeText(this.activity, advogadosDisponiveis.size() + this.activity.getString(R.string.formulario_advogados_com_advogados), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this.activity, PublicacaoFiltro.getInstance().getQuantidadeAdvogadosDisponives() + this.activity.getString(R.string.formulario_advogados_com_advogados), Toast.LENGTH_SHORT).show();
     }
 
     private void setSpinnerValues(List<String> values) {
@@ -74,14 +93,7 @@ public class AdvogadoHelper {
         valuesArray = values.toArray(valuesArray);
         Spinner spinner = (Spinner) this.activity.findViewById(R.id.formulario_advogados);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String> (this.activity, android.R.layout.simple_spinner_dropdown_item, (String[]) valuesArray);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.activity, android.R.layout.simple_spinner_dropdown_item, (String[]) valuesArray);
         spinner.setAdapter(adapter);
-    }
-
-    public Advogado getAdvogadoAtPosition(int pos) {
-        if (pos == 0 || this.advogadosDisponiveis == null || this.advogadosDisponiveis.size() <= 1) {
-            return null;
-        }
-        return this.advogadosDisponiveis.get(pos);
     }
 }

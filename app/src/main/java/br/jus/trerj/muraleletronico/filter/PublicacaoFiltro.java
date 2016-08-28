@@ -1,6 +1,7 @@
 package br.jus.trerj.muraleletronico.filter;
 
 import java.util.Date;
+import java.util.List;
 
 import br.jus.trerj.muraleletronico.modelo.Advogado;
 
@@ -18,6 +19,7 @@ public class PublicacaoFiltro {
     private String numeroProtocolo = "";
     private Date dataPublicacao = new Date();
     private Boolean isSJD = false;
+    private List<Advogado> advogadosDisponiveis;
     private Advogado advogado = null;
 
     public Date getDataPublicacao() {
@@ -52,11 +54,38 @@ public class PublicacaoFiltro {
         isSJD = SJD;
     }
 
+    public List<Advogado> getAdvogadosDisponiveis() {
+        return advogadosDisponiveis;
+    }
+
+    public void setAdvogadosDisponiveis(List<Advogado> advogadosDisponiveis) {
+        this.advogadosDisponiveis = advogadosDisponiveis;
+    }
+
     public Advogado getAdvogado() {
         return advogado;
     }
 
     public void setAdvogado(Advogado advogado) {
         this.advogado = advogado;
+    }
+
+
+    public Boolean hasAdvogados() {
+        return this.advogadosDisponiveis != null && this.advogadosDisponiveis.size() > 0;
+    }
+
+    public Integer getQuantidadeAdvogadosDisponives() {
+        if (!this.hasAdvogados()) {
+            return 0;
+        }
+        return this.advogadosDisponiveis.size();
+    }
+
+    public Advogado getAdvogadoAtPosition(int pos) {
+        if (pos == 0 || this.advogadosDisponiveis == null || this.advogadosDisponiveis.size() <= 1) {
+            return null;
+        }
+        return this.advogadosDisponiveis.get(pos);
     }
 }

@@ -31,8 +31,8 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setIcon(R.drawable.ic_launcher);
 
         PublicacaoFiltro.getInstance().setDataPublicacao(new Date());
-        ImageButton novoAluno = (ImageButton) findViewById(R.id.btn_pesquisa_publicacoes);
-        novoAluno.setOnClickListener(new View.OnClickListener() {
+        ImageButton btnPesquisaPublicacoes = (ImageButton) findViewById(R.id.btn_pesquisa_publicacoes);
+        btnPesquisaPublicacoes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, FormularioActivity.class);
@@ -42,9 +42,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        this.consultar();
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
-        this.consultar();
     }
 
     public void consultar() {

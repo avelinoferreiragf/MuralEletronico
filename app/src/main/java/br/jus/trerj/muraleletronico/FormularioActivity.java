@@ -35,7 +35,7 @@ public class FormularioActivity extends AppCompatActivity {
 
     private AdvogadoHelper advogadoHelper = new AdvogadoHelper(this);
     private AdvogadoWS advogadoWS = new AdvogadoWS(advogadoHelper);
-    private List<Advogado> advogadosDisponiveis;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,15 +43,18 @@ public class FormularioActivity extends AppCompatActivity {
         setContentView(R.layout.activity_formulario);
         Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(this));
 
-        this.advogadosDisponiveis = new ArrayList<Advogado>();
-
         PublicacaoFiltro filtro = PublicacaoFiltro.getInstance();
 
-        this.advogadoWS.consultar(filtro.getDataPublicacao());
         PropriedadesFormularioUtil.setPropriedade(this, R.id.formulario_numero_processo, filtro.getNumeroProcesso());
         PropriedadesFormularioUtil.setPropriedade(this, R.id.formulario_numero_protocolo, filtro.getNumeroProtocolo());
         PropriedadesFormularioUtil.setPropriedade(this, R.id.formulario_data_publicacao, filtro.getDataPublicacao());
         PropriedadesFormularioUtil.setPropriedade(this, R.id.formulario_is_sjd, filtro.getSJD());
+        if (filtro.getAdvogadosDisponiveis() == null) {
+            this.advogadoWS.consultar(filtro.getDataPublicacao());
+        } else {
+            this.advogadoHelper.carregarAdvogadosDisponiveis(filtro.getAdvogadosDisponiveis());
+            this.advogadoHelper.selecionarAdvogadoSelecionado();
+        }
 
         this.setDataPublicacaoListner();
         this.setAdvogadoListner();
@@ -89,9 +92,8 @@ public class FormularioActivity extends AppCompatActivity {
 
         advogadosSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-                Advogado advogadoSelecionado = FormularioActivity.this.advogadoHelper.getAdvogadoAtPosition(pos);
+                Advogado advogadoSelecionado = PublicacaoFiltro.getInstance().getAdvogadoAtPosition(pos);
                 PublicacaoFiltro.getInstance().setAdvogado(advogadoSelecionado);
-                System.out.println(advogadoSelecionado);
             }
             public void onNothingSelected(AdapterView<?> parent) {
             }
