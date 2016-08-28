@@ -7,30 +7,40 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import br.jus.trerj.muraleletronico.filter.PublicacaoFiltro;
+import br.jus.trerj.muraleletronico.helpers.AdvogadoHelper;
 import br.jus.trerj.muraleletronico.infra.AdvogadoWS;
+import br.jus.trerj.muraleletronico.modelo.Advogado;
 import br.jus.trerj.muraleletronico.modelo.Publicacao;
 import br.jus.trerj.muraleletronico.util.PropriedadesFormularioUtil;
 
 public class FormularioActivity extends AppCompatActivity {
 
 
-    private AdvogadoWS advogadoWS = new AdvogadoWS(this);
+    private AdvogadoHelper advogadoHelper = new AdvogadoHelper(this);
+    private AdvogadoWS advogadoWS = new AdvogadoWS(advogadoHelper);
+    private List<Advogado> advogadosDisponiveis;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formulario);
+        this.advogadosDisponiveis = new ArrayList<Advogado>();
 
         PublicacaoFiltro filtro = PublicacaoFiltro.getInstance();
 
@@ -40,6 +50,17 @@ public class FormularioActivity extends AppCompatActivity {
         PropriedadesFormularioUtil.setPropriedade(this, R.id.formulario_data_publicacao, filtro.getDataPublicacao());
         PropriedadesFormularioUtil.setPropriedade(this, R.id.formulario_is_sjd, filtro.getSJD());
 
+        this.setDataPublicacaoListner();
+        this.setAdvogadoListner();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_formulario, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    private void setDataPublicacaoListner() {
         EditText edtDataPublicacao = (EditText) this.findViewById(R.id.formulario_data_publicacao);
 
         edtDataPublicacao.addTextChangedListener(new TextWatcher() {
@@ -57,12 +78,19 @@ public class FormularioActivity extends AppCompatActivity {
                 FormularioActivity.this.advogadoWS.consultar(dataPublicacao);
             }
         });
+
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_formulario, menu);
-        return super.onCreateOptionsMenu(menu);
+    private void setAdvogadoListner() {
+        Spinner advogadosSpinner = (Spinner) this.findViewById(R.id.formulario_advogados);
+
+        advogadosSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+                Object item = parent.getItemAtPosition(pos);
+            }
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {

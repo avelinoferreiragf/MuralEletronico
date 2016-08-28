@@ -8,4 +8,10 @@
     <string name="formulario_data_publicacao">Data da Publicação</string>
     <string name="formulario_is_sjd">Apenas publicações da Secretaria Judiciária (SJD)</string>
     <string name="formulario_advogados">Para escolher o advogado, informe a data de publicação</string>
+
+    <string name="formulario_advogados_sem_advogados">Nenhum advogado relacionado com as publicações nessa data.</string>
+    <string name="formulario_advogados_com_advogado">1 advogado com publicações na data.</string>
+    <string name="formulario_advogados_com_advogados"> advogados com publicações na data.</string>
+
+
 </resources>

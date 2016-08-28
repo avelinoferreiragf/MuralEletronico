@@ -22,7 +22,9 @@ import java.util.Set;
 import br.jus.trerj.muraleletronico.FormularioActivity;
 import br.jus.trerj.muraleletronico.MainActivity;
 import br.jus.trerj.muraleletronico.R;
+import br.jus.trerj.muraleletronico.exceptions.TRERJNonPresentableException;
 import br.jus.trerj.muraleletronico.filter.PublicacaoFiltro;
+import br.jus.trerj.muraleletronico.helpers.AdvogadoHelper;
 import br.jus.trerj.muraleletronico.modelo.Advogado;
 import br.jus.trerj.muraleletronico.modelo.Municipio;
 import br.jus.trerj.muraleletronico.modelo.Publicacao;
@@ -35,15 +37,22 @@ public class AdvogadoWS {
     private static final SimpleDateFormat SDF = new SimpleDateFormat("dd/MM/yyyy");
     private static final String URL = "advogados.wsmural";
 
-    private FormularioActivity activity;
+    private AdvogadoHelper helper;
     private AdvogadoLoader loader = new AdvogadoLoader();
 
-    public AdvogadoWS(FormularioActivity activity) {
-        this.activity = activity;
+    public AdvogadoWS(AdvogadoHelper helper) {
+        this.helper = helper;
+    }
+
+    private List<Advogado> advogados;
+
+    public List<Advogado> getAdvogados() {
+        return advogados;
     }
 
     public void consultar(Date dataPublicacao) {
-        this.inicializarSpinnerAdvogados();
+        this.helper.iniciar();
+        this.advogados = new ArrayList<Advogado>();
 
         String strDataPublicacao = "";
         if (dataPublicacao == null) {
@@ -54,7 +63,7 @@ public class AdvogadoWS {
         RequestParams parametros = new RequestParams();
         parametros.add("dataPublicacao", strDataPublicacao);
 
-        this.activity.findViewById(R.id.loading_panel_formulario).setVisibility(View.VISIBLE);
+        this.helper.avisarUsuarioDoInicioDoCarregamentoAssincrono();
         MuralEletronicoRestClient.get(URL, parametros, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -65,32 +74,15 @@ public class AdvogadoWS {
             public void onSuccess(int statusCode, Header[] headers, JSONArray advogadosJson) {
                 try {
 
-                    Set<Advogado> advogados = AdvogadoWS.this.loader.carregar(advogadosJson);
-                    List<String> toStringAdvogados = AdvogadoWS.this.loader.transformarAdvogadosParaListaDeNomesEOAB(advogados);
+                    List<Advogado> advogados = AdvogadoWS.this.loader.carregar(advogadosJson);
+                    AdvogadoWS.this.helper.carregarAdvogadosDisponiveis(advogados);
 
-                    AdvogadoWS.this.setSpinner(toStringAdvogados);
-                    AdvogadoWS.this.activity.findViewById(R.id.loading_panel_formulario).setVisibility(View.GONE);
-                    Toast.makeText(AdvogadoWS.this.activity, advogados.size() + " advogados com publicações na data.", Toast.LENGTH_SHORT).show();
+                    AdvogadoWS.this.helper.avisarUsuarioDoFinalDoCarregamentoAssincrono();
 
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    throw new TRERJNonPresentableException(e);
                 }
             }
         });
-    }
-    private void inicializarSpinnerAdvogados() {
-        this.setSpinner(new ArrayList<String>());
-    }
-    private void setSpinner(List<String> values) {
-        if (values == null) {
-            return;
-        }
-
-        String[] valuesArray = new String[values.size()];
-        valuesArray = values.toArray(valuesArray);
-        Spinner spinner = (Spinner) this.activity.findViewById(R.id.formulario_advogados);
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String> (this.activity, android.R.layout.simple_spinner_dropdown_item, (String[]) valuesArray);
-        spinner.setAdapter(adapter);
     }
 }

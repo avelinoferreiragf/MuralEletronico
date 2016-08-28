@@ -16,10 +16,10 @@ import br.jus.trerj.muraleletronico.modelo.Advogado;
  */
 public class AdvogadoLoader {
 
-    public Set<Advogado> carregar(JSONArray advogadosJson) {
+    public List<Advogado> carregar(JSONArray advogadosJson) {
         Set<Advogado> advogados = new HashSet<Advogado>();
         if (advogadosJson == null) {
-            return advogados;
+            return new ArrayList<Advogado>();
         }
         try {
             for (int i = 0; i < advogadosJson.length(); i++) {
@@ -35,22 +35,9 @@ public class AdvogadoLoader {
 
                 advogados.add(advogado);
             }
-            return advogados;
+            return new ArrayList<Advogado>(advogados);
         } catch (Exception e) {
             throw new TRERJNonPresentableException(e);
         }
-    }
-
-    public List<String> transformarAdvogadosParaListaDeNomesEOAB(Set<Advogado> advogados) {
-        List<String> toStringAdvogados = new ArrayList<String>();
-        for(Advogado advogado : advogados) {
-            toStringAdvogados.add(advogado.toString());
-        }
-        if (toStringAdvogados.size() == 0) {
-            toStringAdvogados.add("Nenhum advogado encontrado");
-        } else {
-            toStringAdvogados.set(0, "Caso deseje, escolha um advogado.");
-        }
-        return toStringAdvogados;
     }
 }
