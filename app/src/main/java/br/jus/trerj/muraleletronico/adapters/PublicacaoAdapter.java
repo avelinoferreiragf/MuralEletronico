@@ -55,7 +55,7 @@ public class PublicacaoAdapter extends ArrayAdapter<Publicacao> {
         if (publicacao != null) {
             this.publicacaoViewHolder.descricaoPublicacao.setText(publicacao.toString());
             this.publicacaoViewHolder.origemPublicacao.setText(publicacao.getOrigem());
-            this.publicacaoViewHolder.tipoPublicacao.setText(publicacao.getTipo());
+            this.publicacaoViewHolder.tipoPublicacao.setText(publicacao.getTipo().getDescricao());
             this.publicacaoViewHolder.dataPublicacao.setText(SDF_DATA_PUBLICACAO.format(publicacao.getDataPublicacao()));
         }
 

@@ -3,6 +3,8 @@ package br.jus.trerj.muraleletronico.modelo;
 import java.io.Serializable;
 import java.util.Date;
 
+import br.jus.trerj.muraleletronico.enumerations.TipoPublicacao;
+
 /**
  * Created by avelinoferreiragf on 27/08/16.
  */
@@ -22,7 +24,7 @@ public class Publicacao implements Serializable {
     private Municipio municipio;
     private String siglaUnidadePublicadora;
     private Boolean isSJD;
-    private String tipo;
+    private TipoPublicacao tipo;
 
     public String getId() {
         return id;
@@ -120,11 +122,11 @@ public class Publicacao implements Serializable {
         isSJD = SJD;
     }
 
-    public String getTipo() {
+    public TipoPublicacao getTipo() {
         return tipo;
     }
 
-    public void setTipo(String tipo) {
+    public void setTipo(TipoPublicacao tipo) {
         this.tipo = tipo;
     }
 

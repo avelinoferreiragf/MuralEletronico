@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import br.jus.trerj.muraleletronico.enumerations.TipoPublicacao;
 import br.jus.trerj.muraleletronico.exceptions.TRERJNonPresentableException;
 import br.jus.trerj.muraleletronico.modelo.Municipio;
 import br.jus.trerj.muraleletronico.modelo.Publicacao;
@@ -41,7 +42,7 @@ public class PublicacaoLoader {
                 String nomeMunicipio = municipioJSON.getString("nome");
                 String siglaUnidadePublicadora = publicacaoJSON.getString("siglaUnidadePublicadora");
                 Boolean isSJD = publicacaoJSON.getBoolean("isSJD");
-                String tipoPublicacao = publicacaoJSON.getString("tipoPublicacao");
+                TipoPublicacao tipoPublicacao = TipoPublicacao.valueOf(publicacaoJSON.getString("tipoPublicacao"));
 
                 Municipio municipio = new Municipio();
                 municipio.setId(idMunicipio);
