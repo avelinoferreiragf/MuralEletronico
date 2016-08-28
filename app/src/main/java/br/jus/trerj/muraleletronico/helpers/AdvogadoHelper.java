@@ -13,6 +13,8 @@ import br.jus.trerj.muraleletronico.R;
 import br.jus.trerj.muraleletronico.modelo.Advogado;
 
 /**
+ * O Advogado Helper recebe informações do AdvogadoWS e "intermedeia" a comunicação com a Activity
+ * do formulário. Ele manipula o Advogados Spinner.
  * Created by avelinoferreiragf on 28/08/16.
  */
 public class AdvogadoHelper {
@@ -38,9 +40,9 @@ public class AdvogadoHelper {
             toStringAdvogados.add(advogado.toString());
         }
         if (toStringAdvogados.size() == 0) {
-            toStringAdvogados.add("Nenhum advogado encontrado");
+            toStringAdvogados.add(this.activity.getString(R.string.formulario_advogados_sem_advogados_short));
         } else {
-            toStringAdvogados.set(0, "Caso deseje, escolha um advogado.");
+            toStringAdvogados.set(0, this.activity.getString(R.string.formulario_advogados_selecione));
         }
         this.setSpinnerValues(toStringAdvogados);
     }
