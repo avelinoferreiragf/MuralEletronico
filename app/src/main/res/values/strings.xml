@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Mural Eletrônico do TRE-RJ</string>
+    <string-array name="advogados_array_inicial">
+        <item>Para escolher o advogado, informe a data de publicação</item>
+    </string-array>
+</resources>
