@@ -6,9 +6,9 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="Mural Eletrônico do TRE-RJ"
+        android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat">
+        android:theme="@style/Theme.AppCompat.Light">
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,7 +18,7 @@
         </activity>
         <activity
             android:name=".FormularioActivity"
-            android:label="Consultar Publicações">
+            android:label="@string/formulario_titulo">
         </activity>
     </application>
 

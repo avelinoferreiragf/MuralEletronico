@@ -20,42 +20,41 @@ import java.util.Date;
 import br.jus.trerj.muraleletronico.filter.PublicacaoFiltro;
 import br.jus.trerj.muraleletronico.infra.AdvogadoWS;
 import br.jus.trerj.muraleletronico.modelo.Publicacao;
+import br.jus.trerj.muraleletronico.util.PropriedadesFormularioUtil;
 
 public class FormularioActivity extends AppCompatActivity {
 
-    private static final SimpleDateFormat SDF = new SimpleDateFormat("dd/MM/yyyy");
 
     private AdvogadoWS advogadoWS = new AdvogadoWS(this);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formulario);
-        //this.configurarDataPublicacaoPicker();
 
         PublicacaoFiltro filtro = PublicacaoFiltro.getInstance();
 
-        this.setPropriedade(R.id.formulario_numero_processo, filtro.getNumeroProcesso());
-        this.setPropriedade(R.id.formulario_numero_protocolo, filtro.getNumeroProtocolo());
-        this.setPropriedade(R.id.formulario_data_publicacao, filtro.getDataPublicacao());
-        this.setPropriedade(R.id.formulario_is_sjd, filtro.getSJD());
+        this.advogadoWS.consultar(filtro.getDataPublicacao());
+        PropriedadesFormularioUtil.setPropriedade(this, R.id.formulario_numero_processo, filtro.getNumeroProcesso());
+        PropriedadesFormularioUtil.setPropriedade(this, R.id.formulario_numero_protocolo, filtro.getNumeroProtocolo());
+        PropriedadesFormularioUtil.setPropriedade(this, R.id.formulario_data_publicacao, filtro.getDataPublicacao());
+        PropriedadesFormularioUtil.setPropriedade(this, R.id.formulario_is_sjd, filtro.getSJD());
 
         EditText edtDataPublicacao = (EditText) this.findViewById(R.id.formulario_data_publicacao);
 
         edtDataPublicacao.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                Date dataPublicacao = FormularioActivity.this.getPropriedadeDate(s);
-                FormularioActivity.this.advogadoWS.consultar(dataPublicacao);
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-
+                Date dataPublicacao = PropriedadesFormularioUtil.getPropriedadeDate(s);
+                FormularioActivity.this.advogadoWS.consultar(dataPublicacao);
             }
         });
     }
@@ -80,9 +79,9 @@ public class FormularioActivity extends AppCompatActivity {
     private void informarParametrosDaConsulta() {
         PublicacaoFiltro filtro = PublicacaoFiltro.getInstance();
 
-        Date dataPublicacao = this.getPropriedadeDate(R.id.formulario_data_publicacao);
-        String numeroProcesso = this.getPropriedadeString(R.id.formulario_numero_processo);
-        String numeroProtocolo = this.getPropriedadeString(R.id.formulario_numero_protocolo);
+        Date dataPublicacao = PropriedadesFormularioUtil.getPropriedadeDate(this, R.id.formulario_data_publicacao);
+        String numeroProcesso = PropriedadesFormularioUtil.getPropriedadeString(this, R.id.formulario_numero_processo);
+        String numeroProtocolo = PropriedadesFormularioUtil.getPropriedadeString(this, R.id.formulario_numero_protocolo);
 
         filtro.setDataPublicacao(dataPublicacao);
         filtro.setNumeroProcesso(numeroProcesso);
@@ -92,51 +91,5 @@ public class FormularioActivity extends AppCompatActivity {
         finish();
     }
 
-    private String getPropriedadeString(Integer idComponente) {
-        EditText editText = (EditText) this.findViewById(idComponente);
-        return editText.getText().toString();
-    }
 
-    private void setPropriedade(Integer idComponente, Boolean isChecked) {
-        CheckBox checkBox = (CheckBox) this.findViewById(idComponente);
-        if (isChecked == null) {
-            isChecked = false;
-        }
-        checkBox.setChecked(isChecked);
-    }
-
-    private void setPropriedade(Integer idComponente, String text) {
-        EditText editText = (EditText) this.findViewById(idComponente);
-        editText.setText(text);
-    }
-
-    private void setPropriedade(Integer idComponente, Date date) {
-        String strDate = "";
-        if (date != null) {
-            strDate = SDF.format(date);
-        }
-        this.setPropriedade(idComponente, strDate);
-    }
-
-    private Date getPropriedadeDate(Integer idComponente) {
-        String strDate = this.getPropriedadeString(idComponente);
-        return this.getPropriedadeDate(strDate);
-    }
-
-    private Date getPropriedadeDate(String strDate) {
-        try {
-            if (strDate.trim().length() != 10) {
-                return null;
-            }
-            return SDF.parse(strDate);
-        } catch (Exception e) {
-            return null;
-        }
-    }
-    private Date getPropriedadeDate(CharSequence strDate) {
-        if (strDate == null) {
-            return null;
-        }
-        return this.getPropriedadeDate(strDate.toString());
-    }
 }

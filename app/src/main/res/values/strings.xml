@@ -1,6 +1,10 @@
 <resources>
+    <color name="menu">#F1F1F1</color>
     <string name="app_name">Mural Eletrônico do TRE-RJ</string>
-    <string-array name="advogados_array_inicial">
-        <item>Para escolher o advogado, informe a data de publicação</item>
-    </string-array>
+    <string name="formulario_titulo">Consultar Publicações</string>
+    <string name="formulario_numero_processo">Número do Processo</string>
+    <string name="formulario_numero_protocolo">Número do Protocolo</string>
+    <string name="formulario_data_publicacao">Data da Publicação</string>
+    <string name="formulario_is_sjd">Apenas publicações da Secretaria Judiciária (SJD)</string>
+    <string name="formulario_advogados">Para escolher o advogado, informe a data de publicação</string>
 </resources>

@@ -36,14 +36,15 @@ public class AdvogadoWS {
     private static final String URL = "advogados.wsmural";
 
     private FormularioActivity activity;
+    private AdvogadoLoader loader = new AdvogadoLoader();
 
     public AdvogadoWS(FormularioActivity activity) {
         this.activity = activity;
     }
 
     public void consultar(Date dataPublicacao) {
-
         this.inicializarSpinnerAdvogados();
+
         String strDataPublicacao = "";
         if (dataPublicacao == null) {
             return;
@@ -63,32 +64,10 @@ public class AdvogadoWS {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray advogadosJson) {
                 try {
-                    if (advogadosJson == null) {
-                        return;
-                    }
-                    Set<Advogado> advogados = new HashSet<Advogado>();
-                    for (int i = 0; i < advogadosJson.length(); i++) {
-                        JSONObject advogadoJSON = advogadosJson.getJSONObject(i);
-                        Long id = advogadoJSON.getLong("idAdvogado");
-                        String nomeAdvogado = advogadoJSON.getString("nomeAdvogado");
-                        String numeroOAB = advogadoJSON.getString("numeroOAB");
 
-                        Advogado advogado = new Advogado();
-                        advogado.setId(id);
-                        advogado.setNome(nomeAdvogado);
-                        advogado.setNumeroOAB(numeroOAB);
+                    Set<Advogado> advogados = AdvogadoWS.this.loader.carregar(advogadosJson);
+                    List<String> toStringAdvogados = AdvogadoWS.this.loader.transformarAdvogadosParaListaDeNomesEOAB(advogados);
 
-                        advogados.add(advogado);
-                    }
-                    List<String> toStringAdvogados = new ArrayList<String>();
-                    for(Advogado advogado : advogados) {
-                        toStringAdvogados.add(advogado.toString());
-                    }
-                    if (toStringAdvogados.size() == 0) {
-                        toStringAdvogados.add("Nenhum advogado encontrado");
-                    } else {
-                        toStringAdvogados.set(0, "");
-                    }
                     AdvogadoWS.this.setSpinner(toStringAdvogados);
                     AdvogadoWS.this.activity.findViewById(R.id.loading_panel_formulario).setVisibility(View.GONE);
                     Toast.makeText(AdvogadoWS.this.activity, advogados.size() + " advogados com publicações na data.", Toast.LENGTH_SHORT).show();

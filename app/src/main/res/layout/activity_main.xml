@@ -7,7 +7,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="br.jus.trerj.muraleletronico.MainActivity">
+    tools:context="br.jus.trerj.muraleletronico.MainActivity"
+    >
 
     <RelativeLayout
         android:id="@+id/loading_panel"
@@ -23,18 +24,17 @@
         android:id="@+id/lista_publicacoes"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-    <Button
+    <ImageButton
         android:id="@+id/btn_pesquisa_publicacoes"
         android:layout_width="56dp"
         android:layout_height="56dp"
-        android:text="+"
-        android:textSize="40dp"
-        android:textColor="#ffffff"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:layout_marginRight="6dp"
         android:layout_marginBottom="6dp"
         android:background="@drawable/fundo"
         android:elevation="6dp"
-        android:stateListAnimator="@null"/>
+        android:stateListAnimator="@null"
+        android:src="@drawable/ic_action_search_icon"
+        />
 </RelativeLayout>

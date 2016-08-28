@@ -15,19 +15,19 @@
 
         <EditText
             android:id="@+id/formulario_numero_processo"
-            android:hint="Número do Processo"
+            android:hint="@string/formulario_numero_processo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="number"/>
         <EditText
             android:id="@+id/formulario_numero_protocolo"
-            android:hint="Número do Protocolo"
+            android:hint="@string/formulario_numero_protocolo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="number"/>
         <EditText
             android:id="@+id/formulario_data_publicacao"
-            android:hint="Data de Publicação"
+            android:hint="@string/formulario_data_publicacao"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="date"/>
@@ -46,11 +46,17 @@
             android:id="@+id/formulario_is_sjd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Apenas publicações da Secretaria Judiciária (SJD)"/>
+            android:text="@string/formulario_is_sjd"/>
+
         <Spinner
             android:id="@+id/formulario_advogados"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             tools:listitem="advogados_array_inicial"/>
+        <TextView
+            android:id="@+id/formulario_label_advogados"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/formulario_advogados"/>
     </LinearLayout>
 </ScrollView>
