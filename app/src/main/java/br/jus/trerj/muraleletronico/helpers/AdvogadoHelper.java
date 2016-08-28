@@ -46,6 +46,7 @@ public class AdvogadoHelper {
             toStringAdvogados.add(0, this.activity.getString(R.string.formulario_advogados_selecione));
         }
         this.setSpinnerValues(toStringAdvogados);
+        
     }
 
     public void avisarUsuarioDoFinalDoCarregamentoAssincrono() {
