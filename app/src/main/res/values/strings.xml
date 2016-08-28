@@ -16,5 +16,9 @@
     <string name="formulario_advogados_com_advogado">1 advogado com publicações na data.</string>
     <string name="formulario_advogados_com_advogados"> advogados com publicações na data.</string>
 
+    <string name="lista_publicacao_data_publicacao">Publicada em: </string>
+    <string name="lista_publicacao_tipo_publicacao">Tipo: </string>
+    <string name="lista_publicacao_ver_andamentos">Andamentos</string>
+    <string name="lista_publicacao_ver_intimacao">Intimação</string>
 
 </resources>

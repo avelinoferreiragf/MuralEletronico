@@ -23,7 +23,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tipo: "
+            android:text="@string/lista_publicacao_tipo_publicacao"
             android:textStyle="bold"
             />
         <TextView
@@ -39,7 +39,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Publicada em: "
+            android:text="@string/lista_publicacao_data_publicacao"
             android:textStyle="bold"
             />
         <TextView
@@ -49,5 +49,22 @@
             />
 
     </GridLayout>
-
+    <GridLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/lista_ver_andamento"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="@string/lista_publicacao_ver_andamentos"
+            android:textSize="12sp"/>
+        <Button
+            android:id="@+id/lista_ver_intimacao"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="@string/lista_publicacao_ver_intimacao"
+            android:textSize="12sp"/>
+    </GridLayout>
 </LinearLayout>

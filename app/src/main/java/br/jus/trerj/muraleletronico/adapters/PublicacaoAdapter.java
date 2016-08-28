@@ -5,12 +5,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
 
 import br.jus.trerj.muraleletronico.R;
+import br.jus.trerj.muraleletronico.enumerations.TipoPublicacao;
 import br.jus.trerj.muraleletronico.modelo.Publicacao;
 
 /**
@@ -27,6 +29,8 @@ public class PublicacaoAdapter extends ArrayAdapter<Publicacao> {
         TextView origemPublicacao;
         TextView tipoPublicacao;
         TextView dataPublicacao;
+        Button btnVerAndamentos;
+        Button btnVerIntimacao;
     }
 
     public PublicacaoAdapter(Context context, int resource, List<Publicacao> publicacacoes) {
@@ -45,6 +49,8 @@ public class PublicacaoAdapter extends ArrayAdapter<Publicacao> {
             this.publicacaoViewHolder.origemPublicacao = (TextView)v.findViewById(R.id.lista_origem_publicacao);
             this.publicacaoViewHolder.tipoPublicacao = (TextView)v.findViewById(R.id.lista_tipo_publicacao);
             this.publicacaoViewHolder.dataPublicacao = (TextView)v.findViewById(R.id.lista_data_publicacao);
+            this.publicacaoViewHolder.btnVerAndamentos = (Button) v.findViewById(R.id.lista_ver_andamento);
+            this.publicacaoViewHolder.btnVerIntimacao = (Button) v.findViewById(R.id.lista_ver_intimacao);
             v.setTag(this.publicacaoViewHolder);
         } else {
             this.publicacaoViewHolder = (PublicacaoViewHolder) v.getTag();
@@ -57,6 +63,9 @@ public class PublicacaoAdapter extends ArrayAdapter<Publicacao> {
             this.publicacaoViewHolder.origemPublicacao.setText(publicacao.getOrigem());
             this.publicacaoViewHolder.tipoPublicacao.setText(publicacao.getTipo().getDescricao());
             this.publicacaoViewHolder.dataPublicacao.setText(SDF_DATA_PUBLICACAO.format(publicacao.getDataPublicacao()));
+            if(publicacao.getTipo().equals(TipoPublicacao.DECISAO)) {
+                this.publicacaoViewHolder.btnVerIntimacao.setVisibility(View.INVISIBLE);
+            }
         }
 
         return v;
