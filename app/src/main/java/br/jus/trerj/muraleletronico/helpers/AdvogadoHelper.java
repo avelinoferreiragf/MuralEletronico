@@ -27,7 +27,9 @@ public class AdvogadoHelper {
     }
 
     public void iniciar() {
-        this.setSpinnerValues(new ArrayList<String>());
+        List<String> inicial = new ArrayList<String>();
+        inicial.add(this.activity.getString(R.string.formulario_advogados));
+        this.setSpinnerValues(inicial);
     }
 
     public void avisarUsuarioDoInicioDoCarregamentoAssincrono() {
