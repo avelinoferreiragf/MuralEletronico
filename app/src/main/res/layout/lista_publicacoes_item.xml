@@ -43,6 +43,12 @@
             android:textStyle="bold"
             />
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=": "
+            android:textStyle="bold"
+            />
+        <TextView
             android:id="@+id/lista_data_publicacao"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

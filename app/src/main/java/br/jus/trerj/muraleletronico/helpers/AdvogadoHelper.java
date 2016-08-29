@@ -62,7 +62,7 @@ public class AdvogadoHelper {
             return;
         }
         Spinner spinner = (Spinner) this.activity.findViewById(R.id.formulario_advogados);
-        spinner.setSelection(pos);
+        spinner.setSelection(pos + 1);
 
     }
 

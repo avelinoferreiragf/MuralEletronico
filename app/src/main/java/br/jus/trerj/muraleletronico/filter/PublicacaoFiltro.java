@@ -86,6 +86,6 @@ public class PublicacaoFiltro {
         if (pos == 0 || this.advogadosDisponiveis == null || this.advogadosDisponiveis.size() <= 1) {
             return null;
         }
-        return this.advogadosDisponiveis.get(pos);
+        return this.advogadosDisponiveis.get(pos - 1);
     }
 }
