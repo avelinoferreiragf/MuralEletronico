@@ -18,6 +18,7 @@ import br.jus.trerj.muraleletronico.infra.PublicacaoWS;
 public class MainActivity extends AppCompatActivity {
 
     private static final SimpleDateFormat SDF = new SimpleDateFormat("dd/MM/yyyy");
+    private static final int ID_ACTIVITY_FORMULARIO_PESQUISA = 10;
 
     private PublicacaoWS publicacaoWS = new PublicacaoWS(this);
 
@@ -36,15 +37,23 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, FormularioActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, ID_ACTIVITY_FORMULARIO_PESQUISA);
             }
         });
+        this.consultar();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode != ID_ACTIVITY_FORMULARIO_PESQUISA) {
+            return;
+        }
+        this.consultar();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        this.consultar();
     }
 
     @Override
