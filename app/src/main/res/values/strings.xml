@@ -21,4 +21,5 @@
     <string name="lista_publicacao_ver_andamentos">Andamentos</string>
     <string name="lista_publicacao_ver_intimacao">Intimação</string>
 
+    <string name="web_andamento_titulo">Andamento do Processo</string>
 </resources>

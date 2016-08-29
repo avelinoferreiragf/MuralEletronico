@@ -1,6 +1,7 @@
 package br.jus.trerj.muraleletronico.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+import br.jus.trerj.muraleletronico.AndamentoActivity;
 import br.jus.trerj.muraleletronico.R;
 import br.jus.trerj.muraleletronico.enumerations.TipoPublicacao;
 import br.jus.trerj.muraleletronico.modelo.Publicacao;
@@ -56,13 +58,25 @@ public class PublicacaoAdapter extends ArrayAdapter<Publicacao> {
             this.publicacaoViewHolder = (PublicacaoViewHolder) v.getTag();
         }
 
-        Publicacao publicacao = this.publicacacoes.get(position);
+        final Publicacao publicacao = this.publicacacoes.get(position);
 
         if (publicacao != null) {
             this.publicacaoViewHolder.descricaoPublicacao.setText(publicacao.toString());
             this.publicacaoViewHolder.origemPublicacao.setText(publicacao.getOrigem());
             this.publicacaoViewHolder.tipoPublicacao.setText(publicacao.getTipo().getDescricao());
             this.publicacaoViewHolder.dataPublicacao.setText(SDF_DATA_PUBLICACAO.format(publicacao.getDataPublicacao()));
+
+            this.publicacaoViewHolder.btnVerAndamentos.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getContext(), AndamentoActivity.class);
+                    intent.putExtra("numeroProcesso", publicacao.getNumeroDoProcesso());
+                    intent.putExtra("siglaClasseProcesso", publicacao.getSiglaClasseProcesso());
+                    intent.putExtra("numeroProtocolo", publicacao.getNumeroProtocolo().toString());
+
+                    getContext().startActivity(intent);
+                }
+            });
             if(publicacao.getTipo().equals(TipoPublicacao.DECISAO)) {
                 this.publicacaoViewHolder.btnVerIntimacao.setVisibility(View.INVISIBLE);
             }

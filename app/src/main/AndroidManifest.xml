@@ -3,6 +3,7 @@
     package="br.jus.trerj.muraleletronico">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -18,8 +19,8 @@
         </activity>
         <activity
             android:name=".FormularioActivity"
-            android:label="@string/formulario_titulo">
-        </activity>
+            android:label="@string/formulario_titulo"></activity>
+        <activity android:name=".AndamentoActivity"></activity>
     </application>
 
 </manifest>
