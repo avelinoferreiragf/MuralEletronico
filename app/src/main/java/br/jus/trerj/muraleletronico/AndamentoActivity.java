@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -29,6 +30,13 @@ public class AndamentoActivity extends AppCompatActivity {
         webView.getSettings().setJavaScriptEnabled(true);
         webView.setWebViewClient(new WebViewClient());
 
+        webView.setWebViewClient(new WebViewClient() {
+
+            public void onPageFinished(WebView view, String url) {
+                AndamentoActivity.this.findViewById(R.id.loading_andamento).setVisibility(View.GONE);
+            }
+        });
+
         String numeroProcesso = getIntent().getStringExtra("numeroProcesso");
         String siglaProcesso = getIntent().getStringExtra("siglaClasseProcesso");
         String numeroProtocolo = getIntent().getStringExtra("numeroProtocolo");
@@ -37,6 +45,7 @@ public class AndamentoActivity extends AppCompatActivity {
                 .replace("<NUMERO_PROCESSO />", numeroProcesso)
                 .replace("<SIGLA_PROCESSO />", siglaProcesso)
                 .replace("<NUMERO_PROTOCOLO />", numeroProtocolo);
+        this.findViewById(R.id.loading_andamento).setVisibility(View.VISIBLE);
         webView.loadUrl(url);
 
     }
