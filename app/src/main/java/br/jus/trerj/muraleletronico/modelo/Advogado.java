@@ -1,29 +1,32 @@
 package br.jus.trerj.muraleletronico.modelo;
 
-import java.util.Date;
+import java.io.Serializable;
 
 /**
  * Created by avelinoferreiragf on 27/08/16.
  */
-public class Advogado implements Comparable<Advogado> {
-    private Long id;
-    private String nome;
+public class Advogado implements Serializable, Comparable<Advogado> {
+
+    private static final long serialVersionUID = -5290522180419993968L;
+
+    private Long idAdvogado;
+    private String nomeAdvogado;
     private String numeroOAB;
 
-    public Long getId() {
-        return id;
+    public Long getIdAdvogado() {
+        return idAdvogado;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdAdvogado(Long id) {
+        this.idAdvogado = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getNomeAdvogado() {
+        return nomeAdvogado;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setNomeAdvogado(String nome) {
+        this.nomeAdvogado = nomeAdvogado;
     }
 
     public String getNumeroOAB() {
@@ -40,23 +43,23 @@ public class Advogado implements Comparable<Advogado> {
             return  false;
         }
         Advogado compare = (Advogado) object;
-        if (this.id == null || compare.id == null) {
+        if (this.idAdvogado == null || compare.idAdvogado == null) {
             return false;
         }
-        return this.id.equals(compare.id);
+        return this.idAdvogado.equals(compare.idAdvogado);
     }
 
     @Override
     public int hashCode() {
-        int result = ("" + id).hashCode();
-        result = 31 * result + ("" + nome).hashCode();
+        int result = ("" + idAdvogado).hashCode();
+        result = 31 * result + ("" + nomeAdvogado).hashCode();
         result = 31 * result + ("" + numeroOAB).hashCode();
         return result;
     }
 
     @Override
     public String toString() {
-        return this.getNome() + " / OAB: " + this.getNumeroOAB();
+        return this.getNomeAdvogado() + " / OAB: " + this.getNumeroOAB();
     }
 
     @Override

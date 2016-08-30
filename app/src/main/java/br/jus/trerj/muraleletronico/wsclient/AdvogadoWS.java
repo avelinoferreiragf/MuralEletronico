@@ -1,10 +1,4 @@
-package br.jus.trerj.muraleletronico.infra;
-
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.Spinner;
-import android.widget.Toast;
+package br.jus.trerj.muraleletronico.wsclient;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -12,23 +6,15 @@ import com.loopj.android.http.RequestParams;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.net.ConnectException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
-import br.jus.trerj.muraleletronico.FormularioActivity;
-import br.jus.trerj.muraleletronico.MainActivity;
-import br.jus.trerj.muraleletronico.R;
 import br.jus.trerj.muraleletronico.exceptions.TRERJNonPresentableException;
-import br.jus.trerj.muraleletronico.filter.PublicacaoFiltro;
 import br.jus.trerj.muraleletronico.helpers.AdvogadoHelper;
+import br.jus.trerj.muraleletronico.loaders.JsonLoader;
 import br.jus.trerj.muraleletronico.modelo.Advogado;
-import br.jus.trerj.muraleletronico.modelo.Municipio;
-import br.jus.trerj.muraleletronico.modelo.Publicacao;
 import cz.msebera.android.httpclient.Header;
 
 /**
@@ -39,7 +25,7 @@ public class AdvogadoWS {
     private static final String URL = "advogados.wsmural";
 
     private AdvogadoHelper helper;
-    private AdvogadoLoader loader = new AdvogadoLoader();
+    private JsonLoader<Advogado> loader = new JsonLoader<Advogado>(Advogado.class);
 
     public AdvogadoWS(AdvogadoHelper helper) {
         this.helper = helper;

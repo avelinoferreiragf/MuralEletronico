@@ -1,4 +1,4 @@
-package br.jus.trerj.muraleletronico.infra;
+package br.jus.trerj.muraleletronico.loaders;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

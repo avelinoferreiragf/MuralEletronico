@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 
 import java.text.SimpleDateFormat;
@@ -12,8 +11,8 @@ import java.util.Date;
 
 import br.jus.trerj.muraleletronico.exceptions.ExceptionHandler;
 import br.jus.trerj.muraleletronico.filter.PublicacaoFiltro;
-import br.jus.trerj.muraleletronico.infra.AdvogadoWS;
-import br.jus.trerj.muraleletronico.infra.PublicacaoWS;
+import br.jus.trerj.muraleletronico.wsclient.MunicipioWS;
+import br.jus.trerj.muraleletronico.wsclient.PublicacaoWS;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int ID_ACTIVITY_FORMULARIO_PESQUISA = 10;
 
     private PublicacaoWS publicacaoWS = new PublicacaoWS(this);
+    private MunicipioWS municipioWS = new MunicipioWS();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(intent, ID_ACTIVITY_FORMULARIO_PESQUISA);
             }
         });
+        this.municipioWS.consultar();
         this.consultar();
     }
 

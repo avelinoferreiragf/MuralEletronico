@@ -1,4 +1,4 @@
-package br.jus.trerj.muraleletronico.infra;
+package br.jus.trerj.muraleletronico.wsclient;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;

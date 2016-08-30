@@ -1,6 +1,5 @@
 package br.jus.trerj.muraleletronico;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -9,26 +8,20 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 import br.jus.trerj.muraleletronico.exceptions.ExceptionHandler;
 import br.jus.trerj.muraleletronico.filter.PublicacaoFiltro;
 import br.jus.trerj.muraleletronico.helpers.AdvogadoHelper;
-import br.jus.trerj.muraleletronico.infra.AdvogadoWS;
+import br.jus.trerj.muraleletronico.helpers.MunicipioHelper;
+import br.jus.trerj.muraleletronico.wsclient.AdvogadoWS;
 import br.jus.trerj.muraleletronico.modelo.Advogado;
-import br.jus.trerj.muraleletronico.modelo.Publicacao;
 import br.jus.trerj.muraleletronico.util.PropriedadesFormularioUtil;
+import br.jus.trerj.muraleletronico.wsclient.MunicipioWS;
 
 public class FormularioActivity extends AppCompatActivity {
 
@@ -36,6 +29,7 @@ public class FormularioActivity extends AppCompatActivity {
     private AdvogadoHelper advogadoHelper = new AdvogadoHelper(this);
     private AdvogadoWS advogadoWS = new AdvogadoWS(advogadoHelper);
 
+    private MunicipioHelper municipioHelper = new MunicipioHelper(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

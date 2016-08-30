@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import br.jus.trerj.muraleletronico.modelo.Advogado;
+import br.jus.trerj.muraleletronico.modelo.Municipio;
 
 /**
  * Created by avelinoferreiragf on 27/08/16.
@@ -21,6 +22,7 @@ public class PublicacaoFiltro {
     private Boolean isSJD = false;
     private List<Advogado> advogadosDisponiveis;
     private Advogado advogado = null;
+    private List<Municipio> municipiosDisponiveis;
 
     public Date getDataPublicacao() {
         return dataPublicacao;
@@ -70,6 +72,13 @@ public class PublicacaoFiltro {
         this.advogado = advogado;
     }
 
+    public List<Municipio> getMunicipiosDisponiveis() {
+        return municipiosDisponiveis;
+    }
+
+    public void setMunicipiosDisponiveis(List<Municipio> municipiosDisponiveis) {
+        this.municipiosDisponiveis = municipiosDisponiveis;
+    }
 
     public Boolean hasAdvogados() {
         return this.advogadosDisponiveis != null && this.advogadosDisponiveis.size() > 0;

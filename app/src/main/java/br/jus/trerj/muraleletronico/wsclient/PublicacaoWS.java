@@ -1,8 +1,4 @@
-package br.jus.trerj.muraleletronico.infra;
-
-import android.view.View;
-import android.widget.ListView;
-import android.widget.Toast;
+package br.jus.trerj.muraleletronico.wsclient;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -14,10 +10,9 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 import br.jus.trerj.muraleletronico.MainActivity;
-import br.jus.trerj.muraleletronico.R;
-import br.jus.trerj.muraleletronico.adapters.PublicacaoAdapter;
 import br.jus.trerj.muraleletronico.filter.PublicacaoFiltro;
 import br.jus.trerj.muraleletronico.helpers.PublicacaoHelper;
+import br.jus.trerj.muraleletronico.loaders.PublicacaoLoader;
 import br.jus.trerj.muraleletronico.modelo.Publicacao;
 import cz.msebera.android.httpclient.Header;
 
@@ -49,7 +44,7 @@ public class PublicacaoWS {
         }
 
         if (filtro.getAdvogado() != null) {
-            strIdAdvogado = filtro.getAdvogado().getId().toString();
+            strIdAdvogado = filtro.getAdvogado().getIdAdvogado().toString();
         }
 
         if (filtro.getSJD() != null && filtro.getSJD()) {
