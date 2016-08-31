@@ -50,9 +50,9 @@ public class PublicacaoLoader {
 
                 Publicacao publicacao = new Publicacao();
                 publicacao.setId(id);
-                publicacao.setNumeroDoProcesso(numeroProcesso);
-                publicacao.setNumeroDoProcessoCompleto(numeroProcessoCompleto);
-                publicacao.setDescricaoNumeroProcesso(descricaoNumeroDoProcesso);
+                publicacao.setNumeroProcesso(numeroProcesso);
+                publicacao.setNumeroProcessoCompleto(numeroProcessoCompleto);
+                publicacao.setDescricaoNumeroDoProcesso(descricaoNumeroDoProcesso);
                 publicacao.setSiglaClasseProcesso(siglaClasseProcesso);
                 publicacao.setNumeroProtocolo(numeroProtocolo);
                 publicacao.setOrigem(origem);
@@ -61,7 +61,7 @@ public class PublicacaoLoader {
                 publicacao.setMunicipio(municipio);
                 publicacao.setSiglaUnidadePublicadora(siglaUnidadePublicadora);
                 publicacao.setSJD(isSJD);
-                publicacao.setTipo(tipoPublicacao);
+                publicacao.setTipoPublicacao(tipoPublicacao);
 
                 publicacoes.add(publicacao);
             }

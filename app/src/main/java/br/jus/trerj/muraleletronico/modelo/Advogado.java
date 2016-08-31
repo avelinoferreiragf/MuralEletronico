@@ -9,24 +9,24 @@ public class Advogado implements Serializable, Comparable<Advogado> {
 
     private static final long serialVersionUID = -5290522180419993968L;
 
-    private Long idAdvogado;
-    private String nomeAdvogado;
+    private Long id;
+    private String nome;
     private String numeroOAB;
 
-    public Long getIdAdvogado() {
-        return idAdvogado;
+    public Long getId() {
+        return id;
     }
 
-    public void setIdAdvogado(Long id) {
-        this.idAdvogado = id;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public String getNomeAdvogado() {
-        return nomeAdvogado;
+    public String getNome() {
+        return nome;
     }
 
-    public void setNomeAdvogado(String nome) {
-        this.nomeAdvogado = nomeAdvogado;
+    public void setNome(String nome) {
+        this.nome = this.nome;
     }
 
     public String getNumeroOAB() {
@@ -43,23 +43,23 @@ public class Advogado implements Serializable, Comparable<Advogado> {
             return  false;
         }
         Advogado compare = (Advogado) object;
-        if (this.idAdvogado == null || compare.idAdvogado == null) {
+        if (this.id == null || compare.id == null) {
             return false;
         }
-        return this.idAdvogado.equals(compare.idAdvogado);
+        return this.id.equals(compare.id);
     }
 
     @Override
     public int hashCode() {
-        int result = ("" + idAdvogado).hashCode();
-        result = 31 * result + ("" + nomeAdvogado).hashCode();
+        int result = ("" + id).hashCode();
+        result = 31 * result + ("" + nome).hashCode();
         result = 31 * result + ("" + numeroOAB).hashCode();
         return result;
     }
 
     @Override
     public String toString() {
-        return this.getNomeAdvogado() + " / OAB: " + this.getNumeroOAB();
+        return this.getNome() + " / OAB: " + this.getNumeroOAB();
     }
 
     @Override

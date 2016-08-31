@@ -63,21 +63,21 @@ public class PublicacaoAdapter extends ArrayAdapter<Publicacao> {
         if (publicacao != null) {
             this.publicacaoViewHolder.descricaoPublicacao.setText(publicacao.toString());
             this.publicacaoViewHolder.origemPublicacao.setText(publicacao.getOrigem());
-            this.publicacaoViewHolder.tipoPublicacao.setText(publicacao.getTipo().getDescricao());
+            this.publicacaoViewHolder.tipoPublicacao.setText(publicacao.getTipoPublicacao().getDescricao());
             this.publicacaoViewHolder.dataPublicacao.setText(SDF_DATA_PUBLICACAO.format(publicacao.getDataPublicacao()));
 
             this.publicacaoViewHolder.btnVerAndamentos.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(getContext(), AndamentoActivity.class);
-                    intent.putExtra("numeroProcesso", publicacao.getNumeroDoProcesso());
+                    intent.putExtra("numeroProcesso", publicacao.getNumeroProcesso());
                     intent.putExtra("siglaClasseProcesso", publicacao.getSiglaClasseProcesso());
                     intent.putExtra("numeroProtocolo", publicacao.getNumeroProtocolo().toString());
 
                     getContext().startActivity(intent);
                 }
             });
-            if(publicacao.getTipo().equals(TipoPublicacao.DECISAO)) {
+            if(publicacao.getTipoPublicacao().equals(TipoPublicacao.DECISAO)) {
                 this.publicacaoViewHolder.btnVerIntimacao.setVisibility(View.INVISIBLE);
             }
         }

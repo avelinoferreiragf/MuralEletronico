@@ -1,12 +1,14 @@
 package br.jus.trerj.muraleletronico.loaders;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -29,11 +31,15 @@ public class JsonLoader<T extends Serializable> {
         if (jsonArray == null) {
             return new ArrayList<T>();
         }
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        gsonBuilder.registerTypeAdapter(Date.class, new DateDeserializer());
+        Gson gson = gsonBuilder.create();
+        JSONObject jsonObject = null;
         try {
             for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                jsonObject = jsonArray.getJSONObject(i);
 
-                T object = new Gson().fromJson(jsonObject.toString(), classe);
+                T object = gson.fromJson(jsonObject.toString(), classe);
                 returningList.add(object);
             }
             return new ArrayList<T>(returningList);

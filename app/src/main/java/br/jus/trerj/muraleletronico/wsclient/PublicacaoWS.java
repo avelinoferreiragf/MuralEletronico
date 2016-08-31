@@ -12,6 +12,7 @@ import java.util.List;
 import br.jus.trerj.muraleletronico.MainActivity;
 import br.jus.trerj.muraleletronico.filter.PublicacaoFiltro;
 import br.jus.trerj.muraleletronico.helpers.PublicacaoHelper;
+import br.jus.trerj.muraleletronico.loaders.JsonLoader;
 import br.jus.trerj.muraleletronico.loaders.PublicacaoLoader;
 import br.jus.trerj.muraleletronico.modelo.Publicacao;
 import cz.msebera.android.httpclient.Header;
@@ -25,7 +26,7 @@ public class PublicacaoWS {
     private static final String URL = "consulta.wsmural";
 
     private PublicacaoHelper helper;
-    private PublicacaoLoader loader = new PublicacaoLoader();
+    private JsonLoader<Publicacao> loader = new JsonLoader<Publicacao>(Publicacao.class);
 
 
     public PublicacaoWS(MainActivity activity) {
@@ -44,7 +45,7 @@ public class PublicacaoWS {
         }
 
         if (filtro.getAdvogado() != null) {
-            strIdAdvogado = filtro.getAdvogado().getIdAdvogado().toString();
+            strIdAdvogado = filtro.getAdvogado().getId().toString();
         }
 
         if (filtro.getSJD() != null && filtro.getSJD()) {
