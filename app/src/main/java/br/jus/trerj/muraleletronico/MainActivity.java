@@ -11,16 +11,16 @@ import java.util.Date;
 
 import br.jus.trerj.muraleletronico.exceptions.ExceptionHandler;
 import br.jus.trerj.muraleletronico.filter.PublicacaoFiltro;
-import br.jus.trerj.muraleletronico.wsclient.MunicipioWS;
-import br.jus.trerj.muraleletronico.wsclient.PublicacaoWS;
+import br.jus.trerj.muraleletronico.wsclient.MunicipioClientWS;
+import br.jus.trerj.muraleletronico.wsclient.PublicacaoClientWS;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final SimpleDateFormat SDF = new SimpleDateFormat("dd/MM/yyyy");
     private static final int ID_ACTIVITY_FORMULARIO_PESQUISA = 10;
 
-    private PublicacaoWS publicacaoWS = new PublicacaoWS(this);
-    private MunicipioWS municipioWS = new MunicipioWS();
+    private PublicacaoClientWS publicacaoClientWS = new PublicacaoClientWS(this);
+    private MunicipioClientWS municipioClientWS = new MunicipioClientWS();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(intent, ID_ACTIVITY_FORMULARIO_PESQUISA);
             }
         });
-        this.municipioWS.consultar();
+        this.municipioClientWS.consultar();
         this.consultar();
     }
 
@@ -63,6 +63,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void consultar() {
-        this.publicacaoWS.consultar();
+        this.publicacaoClientWS.consultar();
     }
 }

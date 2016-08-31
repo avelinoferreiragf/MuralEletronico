@@ -14,7 +14,7 @@ import br.jus.trerj.muraleletronico.filter.PublicacaoFiltro;
 import br.jus.trerj.muraleletronico.modelo.Advogado;
 
 /**
- * O Advogado Helper recebe informações do AdvogadoWS e "intermedeia" a comunicação com a Activity
+ * O Advogado Helper recebe informações do AdvogadoClientWS e "intermedeia" a comunicação com a Activity
  * do formulário. Ele manipula o Advogados Spinner.
  * Created by avelinoferreiragf on 28/08/16.
  */

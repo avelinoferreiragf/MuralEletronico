@@ -11,16 +11,14 @@ import java.util.List;
 
 import br.jus.trerj.muraleletronico.exceptions.TRERJNonPresentableException;
 import br.jus.trerj.muraleletronico.filter.PublicacaoFiltro;
-import br.jus.trerj.muraleletronico.helpers.MunicipioHelper;
 import br.jus.trerj.muraleletronico.loaders.JsonLoader;
-import br.jus.trerj.muraleletronico.modelo.Advogado;
 import br.jus.trerj.muraleletronico.modelo.Municipio;
 import cz.msebera.android.httpclient.Header;
 
 /**
  * Created by avelinoferreiragf on 30/08/16.
  */
-public class MunicipioWS {
+public class MunicipioClientWS {
 
     private static final String URL = "municipios.wsmural";
 
@@ -38,7 +36,7 @@ public class MunicipioWS {
             public void onSuccess(int statusCode, Header[] headers, JSONArray advogadosJson) {
                 try {
 
-                    List<Municipio> municipios = MunicipioWS.this.loader.carregar(advogadosJson);
+                    List<Municipio> municipios = MunicipioClientWS.this.loader.carregar(advogadosJson);
                     System.out.println(municipios);
                     PublicacaoFiltro.getInstance().setMunicipiosDisponiveis(municipios);
 

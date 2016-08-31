@@ -18,16 +18,15 @@ import br.jus.trerj.muraleletronico.exceptions.ExceptionHandler;
 import br.jus.trerj.muraleletronico.filter.PublicacaoFiltro;
 import br.jus.trerj.muraleletronico.helpers.AdvogadoHelper;
 import br.jus.trerj.muraleletronico.helpers.MunicipioHelper;
-import br.jus.trerj.muraleletronico.wsclient.AdvogadoWS;
+import br.jus.trerj.muraleletronico.wsclient.AdvogadoClientWS;
 import br.jus.trerj.muraleletronico.modelo.Advogado;
 import br.jus.trerj.muraleletronico.util.PropriedadesFormularioUtil;
-import br.jus.trerj.muraleletronico.wsclient.MunicipioWS;
 
 public class FormularioActivity extends AppCompatActivity {
 
 
     private AdvogadoHelper advogadoHelper = new AdvogadoHelper(this);
-    private AdvogadoWS advogadoWS = new AdvogadoWS(advogadoHelper);
+    private AdvogadoClientWS advogadoClientWS = new AdvogadoClientWS(advogadoHelper);
 
     private MunicipioHelper municipioHelper = new MunicipioHelper(this);
 
@@ -44,7 +43,7 @@ public class FormularioActivity extends AppCompatActivity {
         PropriedadesFormularioUtil.setPropriedade(this, R.id.formulario_data_publicacao, filtro.getDataPublicacao());
         PropriedadesFormularioUtil.setPropriedade(this, R.id.formulario_is_sjd, filtro.getSJD());
         if (filtro.getAdvogadosDisponiveis() == null) {
-            this.advogadoWS.consultar(filtro.getDataPublicacao());
+            this.advogadoClientWS.consultar(filtro.getDataPublicacao());
         } else {
             this.advogadoHelper.carregarAdvogadosDisponiveis(filtro.getAdvogadosDisponiveis());
             this.advogadoHelper.selecionarAdvogadoSelecionado();
@@ -75,7 +74,7 @@ public class FormularioActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 Date dataPublicacao = PropriedadesFormularioUtil.getPropriedadeDate(s);
-                FormularioActivity.this.advogadoWS.consultar(dataPublicacao);
+                FormularioActivity.this.advogadoClientWS.consultar(dataPublicacao);
             }
         });
 

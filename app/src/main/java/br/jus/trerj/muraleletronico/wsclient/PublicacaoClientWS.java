@@ -14,14 +14,13 @@ import br.jus.trerj.muraleletronico.MainActivity;
 import br.jus.trerj.muraleletronico.filter.PublicacaoFiltro;
 import br.jus.trerj.muraleletronico.helpers.PublicacaoHelper;
 import br.jus.trerj.muraleletronico.loaders.JsonLoader;
-import br.jus.trerj.muraleletronico.modelo.Municipio;
 import br.jus.trerj.muraleletronico.modelo.Publicacao;
 import cz.msebera.android.httpclient.Header;
 
 /**
  * Created by avelinoferreiragf on 27/08/16.
  */
-public class PublicacaoWS {
+public class PublicacaoClientWS {
 
     private static final SimpleDateFormat SDF = new SimpleDateFormat("dd/MM/yyyy");
     private static final String URL = "consulta.wsmural";
@@ -30,7 +29,7 @@ public class PublicacaoWS {
     private JsonLoader<Publicacao> loader = new JsonLoader<Publicacao>(Publicacao.class,  new TypeToken<List<Publicacao>>(){}.getType());
 
 
-    public PublicacaoWS(MainActivity activity) {
+    public PublicacaoClientWS(MainActivity activity) {
         this.helper = new PublicacaoHelper(activity);
     }
 
@@ -69,9 +68,9 @@ public class PublicacaoWS {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray publicacoesJson) {
-                List<Publicacao> publicacoes = PublicacaoWS.this.loader.carregar(publicacoesJson);
-                PublicacaoWS.this.helper.carregar(publicacoes);
-                PublicacaoWS.this.helper.avisarUsuarioDoFinalDoCarregamentoAssincrono(publicacoes);
+                List<Publicacao> publicacoes = PublicacaoClientWS.this.loader.carregar(publicacoesJson);
+                PublicacaoClientWS.this.helper.carregar(publicacoes);
+                PublicacaoClientWS.this.helper.avisarUsuarioDoFinalDoCarregamentoAssincrono(publicacoes);
             }
         });
     }

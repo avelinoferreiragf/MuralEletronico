@@ -21,14 +21,14 @@ import cz.msebera.android.httpclient.Header;
 /**
  * Created by avelinoferreiragf on 27/08/16.
  */
-public class AdvogadoWS {
+public class AdvogadoClientWS {
     private static final SimpleDateFormat SDF = new SimpleDateFormat("dd/MM/yyyy");
     private static final String URL = "advogados.wsmural";
 
     private AdvogadoHelper helper;
     private JsonLoader<Advogado> loader = new JsonLoader<Advogado>(Advogado.class, new TypeToken<List<Advogado>>(){}.getType());
 
-    public AdvogadoWS(AdvogadoHelper helper) {
+    public AdvogadoClientWS(AdvogadoHelper helper) {
         this.helper = helper;
     }
 
@@ -62,13 +62,13 @@ public class AdvogadoWS {
             public void onSuccess(int statusCode, Header[] headers, JSONArray advogadosJson) {
                 try {
 
-                    List<Advogado> advogados = AdvogadoWS.this.loader.carregar(advogadosJson);
-                    AdvogadoWS.this.helper.carregarAdvogadosDisponiveis(advogados);
+                    List<Advogado> advogados = AdvogadoClientWS.this.loader.carregar(advogadosJson);
+                    AdvogadoClientWS.this.helper.carregarAdvogadosDisponiveis(advogados);
 
-                    AdvogadoWS.this.helper.avisarUsuarioDoFinalDoCarregamentoAssincrono();
+                    AdvogadoClientWS.this.helper.avisarUsuarioDoFinalDoCarregamentoAssincrono();
 
                 } catch (Exception e) {
-                    AdvogadoWS.this.helper.avisarUsuarioDoFinalDoCarregamentoAssincrono();
+                    AdvogadoClientWS.this.helper.avisarUsuarioDoFinalDoCarregamentoAssincrono();
                     throw new TRERJNonPresentableException(e);
                 }
             }
