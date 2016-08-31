@@ -8,6 +8,8 @@ import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import br.jus.trerj.muraleletronico.exceptions.ExceptionHandler;
+
 public class AndamentoActivity extends AppCompatActivity {
 
     private static final String URL_ANDAMENTO = "http://inter03.tse.jus.br/sadpPush/ExibirDadosProcesso.do?nproc=<NUMERO_PROCESSO />&sgcla=<SIGLA_PROCESSO />&nprot=<NUMERO_PROTOCOLO />&comboTribunal=rj&tipoProcesso=J";
@@ -22,6 +24,7 @@ public class AndamentoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(this));
         setContentView(R.layout.activity_andamento);
 
         setTitle(R.string.web_andamento_titulo);
