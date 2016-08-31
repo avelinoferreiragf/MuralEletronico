@@ -1,5 +1,6 @@
 package br.jus.trerj.muraleletronico.wsclient;
 
+import com.google.gson.reflect.TypeToken;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
@@ -25,7 +26,7 @@ public class AdvogadoWS {
     private static final String URL = "advogados.wsmural";
 
     private AdvogadoHelper helper;
-    private JsonLoader<Advogado> loader = new JsonLoader<Advogado>(Advogado.class);
+    private JsonLoader<Advogado> loader = new JsonLoader<Advogado>(Advogado.class, new TypeToken<List<Advogado>>(){}.getType());
 
     public AdvogadoWS(AdvogadoHelper helper) {
         this.helper = helper;

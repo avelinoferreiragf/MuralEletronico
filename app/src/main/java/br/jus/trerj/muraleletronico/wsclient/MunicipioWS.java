@@ -1,5 +1,6 @@
 package br.jus.trerj.muraleletronico.wsclient;
 
+import com.google.gson.reflect.TypeToken;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
@@ -23,7 +24,7 @@ public class MunicipioWS {
 
     private static final String URL = "municipios.wsmural";
 
-    private JsonLoader<Municipio> loader = new JsonLoader<Municipio>(Municipio.class);
+    private JsonLoader<Municipio> loader = new JsonLoader<Municipio>(Municipio.class, new TypeToken<List<Municipio>>(){}.getType());
 
     public void consultar() {
         RequestParams parametros = new RequestParams();
