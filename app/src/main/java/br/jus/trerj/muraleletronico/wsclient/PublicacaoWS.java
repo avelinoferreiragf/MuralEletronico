@@ -13,7 +13,6 @@ import br.jus.trerj.muraleletronico.MainActivity;
 import br.jus.trerj.muraleletronico.filter.PublicacaoFiltro;
 import br.jus.trerj.muraleletronico.helpers.PublicacaoHelper;
 import br.jus.trerj.muraleletronico.loaders.JsonLoader;
-import br.jus.trerj.muraleletronico.loaders.PublicacaoLoader;
 import br.jus.trerj.muraleletronico.modelo.Publicacao;
 import cz.msebera.android.httpclient.Header;
 
